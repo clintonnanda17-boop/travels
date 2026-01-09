@@ -1,0 +1,17 @@
+version: '3.8'
+services:
+  mongodb:
+    image: mongo:6
+    ports: ["27017:27017"]
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: azuri123
+    
+  backend:
+    build: ./backend
+    ports: ["8000:8000"]
+    environment:
+      MONGO_URL: mongodb://admin:azuri123@mongodb:27017
+      DB_NAME: azuri_travels
+    depends_on:
+      - mongodb
